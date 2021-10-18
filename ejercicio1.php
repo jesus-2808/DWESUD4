@@ -23,19 +23,8 @@
         <th>Genero</th>
         <th>Procedencia</th>
         <th>Especie";
-      
-
-<<<<<<< HEAD
-   
-     echo "<table border =2>";
-  
-      $datos=fgets($file);
-      while (feof($file)!=true){
-=======
-
-      
+    
       while (feof($file)!=true){  //recorre el archivo, mientras que el fichero no esté terminado.
->>>>>>> 04c019d3f62da9f66c1154cc51dd81150400a199
           
       $datos=fgets($file); //fgets para devolver la siguiente fila no leida
           list($nombre, $altura, $peso, $color_pelo, $color_piel, $color_ojos, $edad, $genero, $procedencia, $especie)=explode(",", $datos);
