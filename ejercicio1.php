@@ -9,19 +9,36 @@
 <body>
     <?php
    
-
+   $yo="Jesus,181,90,rubio,carne,azul,1990,masculino,hombre,humano";
         $file=fopen("archivo.txt", "r");
-       
-      
+        echo "<table border=2>";
+        echo 
+        "<th>Nombre</th>
+        <th>Altura</th>
+        <th>Peso</th>
+        <th>ColorPelo</th>
+        <th>ColorPiel</th>
+        <th>ColorOjos</th>
+        <th>Edad</th>
+        <th>Genero</th>
+        <th>Procedencia</th>
+        <th>Especie";
       
 
+<<<<<<< HEAD
    
      echo "<table border =2>";
   
       $datos=fgets($file);
       while (feof($file)!=true){
+=======
+
+      
+      while (feof($file)!=true){  //recorre el archivo, mientras que el fichero no esté terminado.
+>>>>>>> 04c019d3f62da9f66c1154cc51dd81150400a199
           
-          list($nombre, $altura, $peso, $color_pelo, $color_piel, $color_ojos, $edad, $genero, $procedencia)=explode(",", $datos);
+      $datos=fgets($file); //fgets para devolver la siguiente fila no leida
+          list($nombre, $altura, $peso, $color_pelo, $color_piel, $color_ojos, $edad, $genero, $procedencia, $especie)=explode(",", $datos);
         echo "<tr>";
           echo "<td>", "$nombre", "</td>";
           echo "<td>", "$altura", "</td>";
@@ -32,18 +49,19 @@
           echo "<td>", "$edad", "</td>";
           echo "<td>", "$genero", "</td>";
           echo "<td>", "$procedencia", "</td>";
+          echo "<td>", "$especie", "</td>";
         echo"</tr>";
-       $datos=fgets($file);
+       
   
       }
      
     
-        echo " </table> ";
-        fclose($file);
-       // $datos_yo= "Jesus, 181,90, rubio, blanco, azul,31, hombre, tierra, humano";
-      //  $file=fopen("archivo.txt", "a");
-        //fwrite($file, $datos_yo);
-        //fclose($file);
+      echo "</table>";
+      fclose($file);
+  
+      $file = fopen("archivo.txt", "a");
+      fwrite($file, $yo);
+      fclose($file);
     ?>
 </body>
 </html>
