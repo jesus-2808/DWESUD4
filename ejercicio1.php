@@ -15,9 +15,9 @@
       
       
 
+   
      echo "<table border =2>";
-
-      
+  
       $datos=fgets($file);
       while (feof($file)!=true){
           
