@@ -10,13 +10,13 @@
     <?php
        
        $file=fopen("locations.csv", "r+");
-         $datos=[];
-         $datos[0]="Mezquita";
-         $datos[1]="27.084823-31.222227";
+        $datos=[];
+        $datos[0]="Caleta";
+        $datos[1]="271.084823-319.222227";
        
-      echo "<table border=2>";
+        echo "<table border=2>";
         echo "<th>Location</th>
-      <th>Latitude</th>";
+        <th>Latitude</th>";
       while (fgetcsv($file)==true){ 
         $array=(fgetcsv($file));
         echo "<tr>";
@@ -29,8 +29,9 @@
       }
       echo "</table>";
       fclose($file);
-      $file = fopen("locations.csv", "a");
+      $file = fopen("locations.csv", "a+");
       fputcsv($file,$datos);
+      fclose($file);
     ?>
 </body>
 </html>
