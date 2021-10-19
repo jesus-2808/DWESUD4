@@ -97,13 +97,14 @@ foreach ($libros as $book){
 
     $nuevo_libro=$libros->addChild("book");
     $nuevo_libro->addAttribute("id445", "bk42143");
-    $nuevo_libro->addAttribute("author", "Kepa Jametxo");
-    $nuevo_libro->addAttribute("title", "el libro de petete");
-    $nuevo_libro->addAttribute("genre", "Risa");
-    $nuevo_libro->addAttribute("price", "13.31");
-    $nuevo_libro->addAttribute("publish_date", "2018-09-09");
-    $nuevo_libro->addAttribute("description", "te vas a partir");
+    $nuevo_libro->addChild("author", "Kepa Jametxo");
+    $nuevo_libro->addChild("title", "el libro de petete");
+    $nuevo_libro->addChild("genre", "Risa");
+    $nuevo_libro->addChild("price", "13.31");
+    $nuevo_libro->addChild("publish_date", "2018-09-09");
+    $nuevo_libro->addChild("description", "te vas a partir");
     $libros->asXML("fichero.xml");
+    $libros = simplexml_load_file("fichero.xml");
 
     echo "<table border =2>";
     
