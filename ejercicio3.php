@@ -35,6 +35,9 @@ foreach($informacion as $elementoHijo) {
 }
 
 $libros = new SimpleXMLElement('fichero.xml', 0, true);
+
+
+
 echo "<table border =2>";
     
 echo "<th>", "Autor", "</th>";
@@ -90,7 +93,71 @@ foreach ($libros as $book){
  
 
     echo " </table> ";
+    echo "<br>";
 
+    $nuevo_libro=$libros->addChild("book");
+    $nuevo_libro->addAttribute("id445", "bk42143");
+    $nuevo_libro->addAttribute("author", "Kepa Jametxo");
+    $nuevo_libro->addAttribute("title", "el libro de petete");
+    $nuevo_libro->addAttribute("genre", "Risa");
+    $nuevo_libro->addAttribute("price", "13.31");
+    $nuevo_libro->addAttribute("publish_date", "2018-09-09");
+    $nuevo_libro->addAttribute("description", "te vas a partir");
+    $libros->asXML("fichero.xml");
+
+    echo "<table border =2>";
+    
+    echo "<th>", "Autor", "</th>";
+    echo "<th>", "titulo", "</th>";
+    echo "<th>", "Género", "</th>";
+    echo "<th>", "Precio", "</th>";
+    echo "<th>", "fecha_publicacion", "</th>";
+    echo "<th>", "descripcion", "</th>";
+    echo "<tr>";
+foreach ($libros->book as $valor){
+    echo "<tr>";
+    echo "<td>";
+  
+    echo $valor->author ;
+
+    echo "</td>";
+
+   
+    echo "<td>";
+  
+    echo $valor->title;
+
+    echo "</td>";
+    
+    
+    echo "<td>";
+  
+    echo  $valor->genre;
+
+    echo "</td>";
+
+    echo "<td>";
+  
+    echo $valor->price;
+
+    echo "</td>";
+
+    echo "<td>";
+  
+    echo  $valor->publish_date;
+
+    echo "</td>";
+    echo "<td>";
+  
+    echo  $valor->description;
+
+    echo "</td>";
+    echo "</tr>";
+   
+  }
+ 
+
+    echo " </table> ";
 
     ?>
 </body>
