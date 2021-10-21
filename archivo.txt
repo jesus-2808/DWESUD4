@@ -48,3 +48,4 @@ Ben Quadinaros,163,65,none,grey, green, yellow,orange,NA,male,Tund,Toong
 Mace Windu,188,84,none,dark,brown,72,male,Haruun Kal,Human
 Ki-Adi-Mundi,198,82,white,pale,yellow,92,male,Cerea,Cerean
 Kit Fisto,196,87,none,green,black,NA,male,Glee Anselm,Nautolan
+Jesus,181,90,rubio,carne,azul,1990,masculino,hombre,humano
