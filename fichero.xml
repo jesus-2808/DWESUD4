@@ -117,4 +117,4 @@
       integrated into a comprehensive development 
       environment.</description>
    </book>
-<book id445="bk42143" author="Kepa Jametxo" title="el libro de petete" genre="Risa" price="13.31" publish_date="2018-09-09" description="te vas a partir"/><book id445="bk42143" author="Kepa Jametxo" title="el libro de petete" genre="Risa" price="13.31" publish_date="2018-09-09" description="te vas a partir"/></catalog>
+<book id445="bk42143" author="Kepa Jametxo" title="el libro de petete" genre="Risa" price="13.31" publish_date="2018-09-09" description="te vas a partir"/><book id445="bk42143" author="Kepa Jametxo" title="el libro de petete" genre="Risa" price="13.31" publish_date="2018-09-09" description="te vas a partir"/><book id445="bk42143"><author>Kepa Jametxo</author><title>el libro de petete</title><genre>Risa</genre><price>13.31</price><publish_date>2018-09-09</publish_date><description>te vas a partir</description></book></catalog>
