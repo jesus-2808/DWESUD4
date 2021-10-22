@@ -19,12 +19,51 @@
        echo "la consulta no ha funcionado correctamente";
    }
    else{
+    echo "<table border =2>";
+    echo "<th>", "id", "</th>";
+    echo "<th>", "Origen", "</th>";
+    echo "<th>", "Destino", "</th>";
+    echo "<th>", "Company", "</th>";
+    echo "<th>", "modelo_avion", "</th>";
        while($fila=mysqli_fetch_assoc($result))
+  
+      
     { 
-        print_r($fila);
-       echo"<br>";
-    }
+        echo "<tr>";
 
+        echo "<td>";
+      
+        echo $fila['id'];
+    
+        echo "</td>";
+        echo "<td>";
+      
+        echo $fila['Origen'];
+    
+        echo "</td>";
+
+        echo "<td>";
+      
+        echo $fila['Destino'];
+    
+        echo "</td>";
+
+        echo "<td>";
+      
+        echo $fila['Company'];
+    
+        echo "</td>";
+
+        echo "<td>";
+      
+        echo $fila['Modelo_avion'];
+    
+        echo "</td>";
+        
+        
+       
+    }
+    echo "</table>";
    }
 
     mysqli_close($mysqli);
