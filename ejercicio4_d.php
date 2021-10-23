@@ -8,58 +8,62 @@
 </head>
 <body>
     <?php
-   
-    @$mysqli=mysqli_connect('localhost', 'developer', 'developer', 'agenciaviajes');
+    @$mysqli=mysqli_connect('localhost', 'root', '2808', 'agenciaviajes');
     $error=mysqli_connect_errno();
     if($error!=null){
         echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";
         exit();
     }
     $result=mysqli_query($mysqli, "SELECT * FROM `vuelos`");
-   
    if ($result==false) {
-       
        echo "la consulta no ha funcionado correctamente";
    }
    else{
     echo "<table border =2>";
-    echo "<th>", "Id", "</th>";
+    echo "<th>", "id", "</th>";
     echo "<th>", "Origen", "</th>";
     echo "<th>", "Destino", "</th>";
+    echo "<th>", "Fecha", "</th>";
     echo "<th>", "Company", "</th>";
     echo "<th>", "modelo_avion", "</th>";
-    
-       while($fila=mysqli_fetch_object($result)) 
+       while($fila=mysqli_fetch_row($result))
+  
+      
     { 
-      
         echo "<tr>";
+
         echo "<td>";
       
-        echo $fila->id;
+        echo $fila[0];
+    
+        echo "</td>";
+        echo "<td>";
+      
+        echo $fila[1];
     
         echo "</td>";
 
         echo "<td>";
       
-        echo $fila->Origen;
+        echo $fila[2];
     
         echo "</td>";
 
         echo "<td>";
       
-        echo $fila->Destino;
+        echo $fila[3];
     
         echo "</td>";
 
         echo "<td>";
       
-        echo $fila->Company;
+        echo $fila[4];
     
         echo "</td>";
 
         echo "<td>";
       
-        echo $fila->Modelo_avion;
+        echo $fila[5];
     
         echo "</td>";
         
