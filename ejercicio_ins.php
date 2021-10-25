@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-    @$mysqli=mysqli_connect('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
+    @$mysqli=mysqli_connect('localhost', 'root', '2808', 'agenciaviajes');  //en casa root, 2808
     $error=mysqli_connect_errno();
     if($error!=null){
         echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";

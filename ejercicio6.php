@@ -8,48 +8,100 @@
 </head>
 <body>
     <?php
-    $mysqli;
-    $result;
-function creaConexion(){
-@$mysqli=mysqli_connect('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
-    $error=mysqli_connect_errno();
-    if($error!=null){
-        echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";
-        exit();
-    }
-}
-
-    function creaVuelo($result, $mysqli) { 
-    $result=mysqli_query($mysqli, "INSERT INTO `vuelos` (Origen, Destino, Fecha, Company, Modelo_avion) VALUES ('Sevilla', 'Tenerife Norte', '2021-10-28 13:10:00', 'Ryanair', 'A380')");
-  
-   if ($result==false) {
-       echo "la consulta no ha funcionado correctamente";
-   }else{
-        echo "Se han insertado", mysqli_affected_rows($mysqli), " filas";
-        echo "<br>";
-        echo "el id del ultimo elemento añadido es ", mysqli_insert_id($mysqli);
-   }
-}
-
-   if ($result2==false) {
-    echo "la consulta no ha funcionado correctamente";
-    }else{
-     echo "Se han borrado", mysqli_affected_rows($mysqli), " filas";
-     echo "<br>";
     
+function creaConexion(){
+    @$mysqli=mysqli_connect('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
+    $error=mysqli_connect_errno();
+        if($error!=null){
+            echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";
+            exit();
     }
+    return $mysqli;
+}
 
-    if ($result3==false) {
-        echo "la consulta no ha funcionado correctamente";
+function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) { 
+    $mysqli=creaConexion();
+    
+
+    $sql= "INSERT INTO vuelos (Origen, Destino, Fecha, Company, Modelo_avion) VALUES (?,?,?,?,?)";
+    mysqli_stmt_init($mysqli);
+    if($stmt=mysqli_prepare($mysqli, $sql)){
+        mysqli_stmt_bind_param($stmt, "sssss", $origen, $destino, $fecha, $company, $modelo_avion);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        echo "Vuelo creado con exito <br>";
     }else{
-         echo "Se han actualizado", mysqli_affected_rows($mysqli), " filas";
-         echo "<br>";
+        echo "error al crear el vuelo <br>";
+    }
+}
+
+   
+    function modificaDestino ($nuevoDestino, $id ){
+     $mysqli=creaConexion();
+    
+     $sql= "UPDATE vuelos SET Destino=? WHERE id=?";
+     mysqli_stmt_init($mysqli);
+     if($stmt=mysqli_prepare($mysqli, $sql)){
+         mysqli_stmt_bind_param($stmt, "si", $nuevoDestino, $id);
+         mysqli_stmt_execute($stmt);
         
+         mysqli_stmt_close($stmt);
+     
+    }
+    }
+
+    function actualizaCompany( $newCompany, $id){
+        $mysqli=creaConexion();
+        
+        $sql="UPDATE vuelos SET Company=?  WHERE id=?";
+        mysqli_stmt_init($mysqli);
+        if($stmt=mysqli_prepare($mysqli, $sql)){
+            mysqli_stmt_bind_param($stmt, "si",  $newCompany, $id);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+    
+            echo "Compañia modificada <br>";
+        }else{
+            echo "error al modificar la compañia <br>";
+        }
+
+    }
+    
+    function deleteFlight($id){
+        $mysqli=creaConexion();
+      
+        $sql="DELETE FROM `vuelos` WHERE id=?";
+        mysqli_stmt_init($mysqli);
+        if($stmt=mysqli_prepare($mysqli, $sql)){
+            mysqli_stmt_bind_param($stmt, "i",  $id);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+    
+            echo "vuelo borrado exitosamente <br>";
+        }else{
+            echo "error al borrar el vuelo <br>";
+        }
+
+    }
+
+    function getFlights(){
+        $mysqli=creaConexion();
+        $sql="SELECT * FROM `vuelos`";
+        mysqli_stmt_init($mysqli);
+        if($stmt=mysqli_prepare($mysqli, $sql)){
+            mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt,$id,$origen, $destino, $fecha, $company, $modelo_avion);
+        while(mysqli_stmt_fetch($stmt)){
+         echo "El vuelo con origen $origen y destino $destino tiene fecha prevista $fecha y es operado por $company con el modelo $modelo_avion";
+            }
+        }
+        
+        mysqli_stmt_close($stmt);
     }
 
 
-
-   mysqli_close($mysqli);
+   
    ?>
 </body>
 </html>
