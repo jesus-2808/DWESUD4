@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-    @$mysqli=mysqli_connect('localhost', 'root', '2808', 'agenciaviajes');
+    @$mysqli=mysqli_connect('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
     $error=mysqli_connect_errno();
     if($error!=null){
         echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";
@@ -71,7 +71,7 @@
     
         echo "</td>";
         
-        
+        echo "</tr>";
        
     }
     echo "</table>";
@@ -83,10 +83,11 @@
     echo "la consulta no ha funcionado correctamente";
 }
 else{
- echo '<h3>Forma 2 - mysqli_fetch_object()</h3>';
+ echo '<h3>Recorriendo como - mysqli_fetch_object()</h3>';
  echo "<table border =2>";
  echo "<th>", "Id", "</th>";
  echo "<th>", "Origen", "</th>";
+ echo "<th>", "Fecha", "</th>";
  echo "<th>", "Destino", "</th>";
  echo "<th>", "Company", "</th>";
  echo "<th>", "modelo_avion", "</th>";
@@ -102,9 +103,16 @@ else{
  
      echo "</td>";
 
+
      echo "<td>";
    
      echo $fila->Origen;
+ 
+     echo "</td>";
+
+     echo "<td>";
+   
+     echo $fila->Fecha;
  
      echo "</td>";
 
@@ -137,7 +145,7 @@ if ($result3==false) {
     echo "la consulta no ha funcionado correctamente";
 }
 else{
- echo '<h3>Forma 3 - mysqli_fetch_array()</h3>';
+ echo '<h3>Recorriendo como- mysqli_fetch_array()</h3>';
  echo "<table border =2>";
  echo "<th>", "Id", "</th>";
  echo "<th>", "Origen", "</th>";
@@ -198,7 +206,7 @@ if ($result4==false) {
 }
 else{
  echo "<table border =2>";
- echo '<h3>Forma 4 - mysqli_fetch_row()</h3>';
+ echo '<h3>Recorriendo como - mysqli_fetch_row()</h3>';
  echo "<th>", "id", "</th>";
  echo "<th>", "Origen", "</th>";
  echo "<th>", "Destino", "</th>";
