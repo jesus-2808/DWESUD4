@@ -23,42 +23,45 @@ function creaConexion(){
         $mysqli=creaConexion();
         
         $sql= "INSERT INTO vuelos (Origen, Destino, Fecha, Company, Modelo_avion) VALUES (?,?,?,?,?)";
-        mysqli_stmt_init($mysqli);
-        if($stmt=mysqli_prepare($mysqli, $sql)){
-            mysqli_stmt_bind_param($stmt, "sssss", $origen, $destino, $fecha, $company, $modelo_avion);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
+        $mysqli->stmt_init();
+        if($stmt=$mysqli->prepare($sql)){
+           $stmt ->bind_param("sssss", $origen, $destino, $fecha, $company, $modelo_avion);
+           $stmt->execute();
+           $stmt ->close();
+           $mysqli ->close();
+           
 
-            echo "Vuelo creado con exito <br>";
+          return true;
         }else{
-            echo "error al crear el vuelo <br>";
+           return false;
+           $mysqli ->close();
         }
     }
 
    
     function modificaDestino ($nuevoDestino, $id ){
         $mysqli=creaConexion();
-    
+        $retorno=false;
         $sql= "UPDATE vuelos SET Destino=? WHERE id=?";
-        mysqli_stmt_init($mysqli);
-        if($stmt=mysqli_prepare($mysqli, $sql)){
-            mysqli_stmt_bind_param($stmt, "si", $nuevoDestino, $id);
-            mysqli_stmt_execute($stmt);
-            
-            mysqli_stmt_close($stmt);
-     
+        $mysqli ->stmt_init();
+        if($stmt=$mysqli->prepare ($sql)){
+            $stmt->bind_param("si", $nuevoDestino, $id);
+            $stmt->execute();
+            $stmt->close();
         }
+        $mysqli -> close();
+        return $retorno;
     }
 
     function actualizaCompany( $newCompany, $id){
         $mysqli=creaConexion();
         $retorno=false;
         $sql="UPDATE vuelos SET Company=?  WHERE id=?";
-        mysqli_stmt_init($mysqli);
-        if($stmt=mysqli_prepare($mysqli, $sql)){
-            mysqli_stmt_bind_param($stmt, "si",  $newCompany, $id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
+        $mysqli->stmt_init();
+        if($stmt=$mysqli->prepare ($sql)){
+            $stmt->bind_param("si",  $newCompany, $id);
+            $stmt->execute();
+            $stmt->close();
     
         }
         $mysqli -> close();
@@ -71,12 +74,12 @@ function creaConexion(){
         $mysqli=creaConexion();
       
         $sql="DELETE FROM `vuelos` WHERE id=?";
-        mysqli_stmt_init($mysqli);
-        if($stmt=mysqli_prepare($mysqli, $sql)){
-            mysqli_stmt_bind_param($stmt, "i",  $id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-    
+        $mysqli->stmt_init();
+        if($stmt=$mysqli->prepare ($sql)){
+           $stmt->bind_param ( "i",  $id);
+           $stmt->execute();
+           $stmt->close();
+            
             //if    mysqli_stmt_execute($stmt);
             echo "vuelo borrado exitosamente <br>";
         }else{
@@ -91,7 +94,7 @@ function creaConexion(){
         mysqli_stmt_init($mysqli);
         $result=$mysqli -> query($sql);
         if($stmt=$mysqli->prepare($sql)){
-            mysqli_stmt_execute($stmt);
+            $stmt->execute();
     
             echo "<table border =2>";
             echo "<th>", "id", "</th>";
