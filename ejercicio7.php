@@ -10,7 +10,7 @@
     <?php
     
 function creaConexion(){
-    @$mysqli=mysqli_connect('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
+    @$mysqli=new mysqli('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
     $error=mysqli_connect_errno();
         if($error!=null){
             echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";
@@ -19,35 +19,35 @@ function creaConexion(){
     return $mysqli;
 }
 
-function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) { 
-    $mysqli=creaConexion();
-    
-    $sql= "INSERT INTO vuelos (Origen, Destino, Fecha, Company, Modelo_avion) VALUES (?,?,?,?,?)";
-    mysqli_stmt_init($mysqli);
-    if($stmt=mysqli_prepare($mysqli, $sql)){
-        mysqli_stmt_bind_param($stmt, "sssss", $origen, $destino, $fecha, $company, $modelo_avion);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
+    function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) { 
+        $mysqli=creaConexion();
+        
+        $sql= "INSERT INTO vuelos (Origen, Destino, Fecha, Company, Modelo_avion) VALUES (?,?,?,?,?)";
+        mysqli_stmt_init($mysqli);
+        if($stmt=mysqli_prepare($mysqli, $sql)){
+            mysqli_stmt_bind_param($stmt, "sssss", $origen, $destino, $fecha, $company, $modelo_avion);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
 
-        echo "Vuelo creado con exito <br>";
-    }else{
-        echo "error al crear el vuelo <br>";
+            echo "Vuelo creado con exito <br>";
+        }else{
+            echo "error al crear el vuelo <br>";
+        }
     }
-}
 
    
     function modificaDestino ($nuevoDestino, $id ){
-     $mysqli=creaConexion();
+        $mysqli=creaConexion();
     
-     $sql= "UPDATE vuelos SET Destino=? WHERE id=?";
-     mysqli_stmt_init($mysqli);
-     if($stmt=mysqli_prepare($mysqli, $sql)){
-         mysqli_stmt_bind_param($stmt, "si", $nuevoDestino, $id);
-         mysqli_stmt_execute($stmt);
-        
-         mysqli_stmt_close($stmt);
+        $sql= "UPDATE vuelos SET Destino=? WHERE id=?";
+        mysqli_stmt_init($mysqli);
+        if($stmt=mysqli_prepare($mysqli, $sql)){
+            mysqli_stmt_bind_param($stmt, "si", $nuevoDestino, $id);
+            mysqli_stmt_execute($stmt);
+            
+            mysqli_stmt_close($stmt);
      
-    }
+        }
     }
 
     function actualizaCompany( $newCompany, $id){
@@ -61,9 +61,9 @@ function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) {
             mysqli_stmt_close($stmt);
     
         }
-        mysqli_close($mysqli);
+        $mysqli -> close();
         return $retorno;
-        }
+    }
 
     
     
@@ -89,8 +89,8 @@ function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) {
         $mysqli=creaConexion();
         $sql="SELECT * FROM `vuelos`";
         mysqli_stmt_init($mysqli);
-        $result=mysqli_query($mysqli, $sql);
-        if($stmt=mysqli_prepare($mysqli, $sql)){
+        $result=$mysqli -> query($sql);
+        if($stmt=$mysqli->prepare($sql)){
             mysqli_stmt_execute($stmt);
     
             echo "<table border =2>";
@@ -100,7 +100,7 @@ function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) {
             echo "<th>", "Destino", "</th>";
             echo "<th>", "Company", "</th>";
             echo "<th>", "modelo_avion", "</th>";
-        while($fila=mysqli_fetch_assoc($result)){
+        while($fila=$result -> fetch_assoc()){
             
             echo "<tr>";
 
@@ -146,11 +146,18 @@ function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) {
         echo "<br>";
             
         }
+
+    
+      
         
-        mysqli_stmt_close($stmt);
+      
     }
     
-
+    creaVuelo("Malaga","Belfast","2021-11-26 16:12:53","Ryanair","Boeing 747");
+    modificaDestino("Sevilla", 24);
+    actualizaCompany( "Iberia", 1);
+    deleteFlight(17);
+    getFlights();
    
    ?>
 </body>

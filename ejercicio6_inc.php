@@ -10,9 +10,9 @@
     <?php
       include "ejercicio6.php";
       creaConexion();
-      creaVuelo("Malaga","Belfast","2021-11-26 16:12:53","Ryanair","Boeing 747");
-      modificaDestino("Marrakech", 1);
-      actualizaCompany( "Iberia", 4);
+      //creaVuelo("Malaga","Belfast","2021-11-26 16:12:53","Ryanair","Boeing 747");
+      modificaDestino("Cadiz", 24);
+      actualizaCompany( "Iberia", 1);
       deleteFlight(17);
       getFlights();
     ?>
