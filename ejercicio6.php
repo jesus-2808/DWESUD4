@@ -67,13 +67,13 @@ function creaVuelo($origen, $destino, $fecha, $company, $modelo_avion) {
 
     
     
-    function deleteFlight($id){
+    function deleteFlight($Origen){
         $mysqli=creaConexion();
       
-        $sql="DELETE FROM `vuelos` WHERE id=?";
+        $sql="DELETE FROM `vuelos` WHERE Origen=?";
         mysqli_stmt_init($mysqli);
         if($stmt=mysqli_prepare($mysqli, $sql)){
-            mysqli_stmt_bind_param($stmt, "i",  $id);
+            mysqli_stmt_bind_param($stmt, "s",  $origen);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
     

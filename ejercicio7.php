@@ -11,7 +11,7 @@
     
 function creaConexion(){
     @$mysqli=new mysqli('localhost', 'developer', 'developer', 'agenciaviajes');  //en casa root, 2808
-    $error=mysqli_connect_errno();
+   $error= $mysqli -> connect_errno;
         if($error!=null){
             echo"<p>error $error conectando a la base de datos:", mysqli_connect_error(),"</p>";
             exit();
@@ -60,7 +60,7 @@ function creaConexion(){
         $mysqli->stmt_init();
         if($stmt=$mysqli->prepare ($sql)){
             $stmt->bind_param("si",  $newCompany, $id);
-            $stmt->execute();
+         $retorno= $stmt->execute();
             $stmt->close();
     
         }
@@ -70,13 +70,13 @@ function creaConexion(){
 
     
     
-    function deleteFlight($id){
+    function deleteFlight($origen){
         $mysqli=creaConexion();
       
-        $sql="DELETE FROM `vuelos` WHERE id=?";
+        $sql="DELETE FROM `vuelos` WHERE Origen=?";
         $mysqli->stmt_init();
         if($stmt=$mysqli->prepare ($sql)){
-           $stmt->bind_param ( "i",  $id);
+           $stmt->bind_param ( "s",  $origen);
            $stmt->execute();
            $stmt->close();
             
@@ -156,10 +156,10 @@ function creaConexion(){
       
     }
     
-    creaVuelo("Malaga","Belfast","2021-11-26 16:12:53","Ryanair","Boeing 747");
-    modificaDestino("Sevilla", 24);
-    actualizaCompany( "Iberia", 1);
-    deleteFlight(17);
+    creaVuelo("Sevilla","Bucarest","2021-11-26 16:12:53","Ryanair","Boeing 747");
+    modificaDestino("Manchester", 25);
+    actualizaCompany( "Iberia", 28);
+    deleteFlight("Malaga");
     getFlights();
    
    ?>
