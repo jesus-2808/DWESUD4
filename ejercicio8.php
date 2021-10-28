@@ -374,4 +374,4 @@ while($pdo =$turistas6->fetch(PDO::FETCH_BOUND)){
     $conn=null;
     ?>
 </body>
-</html>
+</html>pdo
