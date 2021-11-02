@@ -22,7 +22,8 @@
      $sql2= "INSERT INTO turista (nombre, apellido1, apellido2, direccion, telefono) VALUES ('Wayne', 'Rooney', 'Martínez', 'Trebujena', '6666666')";
      $insClientes=$connexion->exec ($sql2);
      echo "Se han insertado $insClientes clientes  ";
-    $sql3= "UPDATE turista SET nombre='Rosa', apellido1='Gonzalez', apellido2='Muñoz', direccion= 'Inglaterra' , telefono = '111111' WHERE id=6";
+    $sql3= "UPDATE turista SET nombre='Rosa', apellido1='Gonzalez', apellido2='Muñoz', direccion= 'Inglaterra' , telefono = '111111' WHERE id=7
+    ";
     $updClientes=$connexion->exec ($sql3);
     echo "Se han updateado $updClientes clientes  ";
     }catch(PDOException $e){
